@@ -2,7 +2,7 @@ import pandas as pd
 
 class DataManager:
     def __init__(self):
-        print("Classification and regression data manager initiated")
+        print("Classification and regression data manager initialized")
 
     @staticmethod
     def read_data(vectors, gold_file, task, column_id=None, column_score=None):
@@ -16,7 +16,7 @@ class DataManager:
 
         fields = [column_id, column_score]
         
-        gold = pd.read_csv(gold_file, usecols=fields, delim_whitespace=True, index_col=False, header=None, names=fields, skipinitialspace=True, skip_blank_lines=True, encoding='utf-8')
+        gold = pd.read_csv(gold_file,"\t", usecols=fields, encoding='latin1')
 
         gold.rename(columns={column_id: 'name'}, inplace=True)
         gold.rename(columns={column_score: 'label'}, inplace=True)
