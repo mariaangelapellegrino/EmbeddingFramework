@@ -5,6 +5,7 @@ import numpy as np
 import os
 import time
 import datetime
+from multiprocessing import Process
 
 from data_manager import DataManager
 from ClassificationAndRegression.classification_and_regression_evaluation import Evaluator as Classification_Regression_evaluator
@@ -61,6 +62,32 @@ def run_tests():
     Entity_Relatedness_evaluator.evaluate(vectors, distance_metric, result_directory)
     Semantic_Analogies_evaluator.evaluate(vectors, vectors_size, analogy_function, top_k, result_directory)
 
+def run_tests_in_parallel():
+    processes = []
+    
+    p1 = Process(target=Classification_Regression_evaluator.evaluate, args=(vectors, result_directory))
+    p1.start()
+    processes.append(p1)
+
+    p2 = Process(target=Clustering_evaluator.evaluate, args=(vectors, distance_metric, result_directory))
+    p2.start()
+    processes.append(p2)
+
+    p3 = Process(target=Doc_Similarity_evaluator.evaluate, args=(vectors, distance_metric, result_directory))
+    p3.start()
+    processes.append(p3)
+
+    p4 = Process(target=Entity_Relatedness_evaluator.evaluate, args=(vectors, distance_metric, result_directory))
+    p4.start()
+    processes.append(p4)
+
+    p5 = Process(target=Semantic_Analogies_evaluator.evaluate, args=(vectors, vectors_size, analogy_function, top_k, result_directory))
+    p5.start()
+    processes.append(p5)
+
+    for p in processes:
+        p.join()
+
 if __name__ == "__main__":
     manage_parameters()
     
@@ -70,7 +97,8 @@ if __name__ == "__main__":
 
     create_result_directory()
 
-    run_tests()
+    #run_tests()
+    run_tests_in_parallel()
 
 
 
