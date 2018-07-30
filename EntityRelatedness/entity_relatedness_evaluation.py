@@ -41,7 +41,7 @@ class Evaluator:
             scores = model.Model.evaluate_ranking(groups.keys(), gold_rank_list, predicted_rank_list)
 
         with open(results_folder+'/entityRelatedness_KORE.csv', "wb") as csv_file:
-            fieldnames = ['task_name', 'gold_standard_file', 'entity_name', 'kendalltau_correlation', 'kendalltau_pvalue']
+            fieldnames = ['task_name', 'entity_name', 'kendalltau_correlation', 'kendalltau_pvalue']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             

@@ -1,5 +1,5 @@
 import argparse
-import evaluation_manager
+from evaluation_manager import EvaluationManager
 import numpy as np
 
 def default_analogy_function(a, b, c, index_a, index_b, index_c, data, top_k):

@@ -35,6 +35,6 @@ class Model:
 
         for i in range(len(entities_list)):
             kendalltau_correlation, kendalltau_pvalue = kendalltau(gold_ranking_list[i], predicted_ranking_list[i])
-            score_list.append({'task_name' : 'Entity Relatedness', 'gold_standard_file' : 'KORE', 'entity_name' : entities_list[i], 'kendalltau_correlation': kendalltau_correlation, 'kendalltau_pvalue': kendalltau_pvalue})
+            score_list.append({'task_name' : 'Entity Relatedness', 'entity_name' : entities_list[i], 'kendalltau_correlation': kendalltau_correlation, 'kendalltau_pvalue': kendalltau_pvalue})
 
         return score_list

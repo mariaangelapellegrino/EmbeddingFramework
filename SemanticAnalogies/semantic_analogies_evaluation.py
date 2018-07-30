@@ -26,12 +26,12 @@ class Evaluator:
                 print('SemanticAnalogies : Problems in merging vector with gold standard ' + gold_standard_file)
             else:
                 right_answers, tot_answers, accuracy = model.Model.compute_semantic_analogies(vocab, data, W_norm, analogy_function, top_k)
-                scores.append({'task_name':'Semantic Analogies', 'gold_standard_file':gold_standard_file, 'top_k_value':top_k, 'right_answers':right_answers, 'tot_answers':tot_answers, 'accuracy':accuracy})
+                scores.append({'task_name':'Semantic Analogies', 'top_k_value':top_k, 'right_answers':right_answers, 'tot_answers':tot_answers, 'accuracy':accuracy})
 
-        with open(results_folder+'/semanticAnalogies_'+gold_standard_filename+'.csv', 'wb') as file_result:
-            fieldnames = ['task_name', 'gold_standard_file', 'top_k_value', 'right_answers', 'tot_answers', 'accuracy']
-            writer = csv.DictWriter(file_result, fieldnames=fieldnames)
-            writer.writeheader()
-            for score in scores:
-                writer.writerow(score)
+            with open(results_folder+'/semanticAnalogies_'+gold_standard_filename+'.csv', 'wb') as file_result:
+                fieldnames = ['task_name', 'top_k_value', 'right_answers', 'tot_answers', 'accuracy']
+                writer = csv.DictWriter(file_result, fieldnames=fieldnames)
+                writer.writeheader()
+                for score in scores:
+                    writer.writerow(score)
 
