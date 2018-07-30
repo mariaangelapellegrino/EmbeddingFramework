@@ -33,17 +33,7 @@ class Model:
         
         for j in range(num_iter):
             subset = np.arange(j*split_size, min((j + 1)*split_size, len(ind1)))
-
-            pred_vec = eval(analogy_function + '('+W[ind2[subset], :]+','+ W[ind1[subset], :]+','+ W[ind3[subset], :]+')')
-    
-            dist = np.dot(W, pred_vec.T)
-
-            for k in range(len(subset)):
-                dist[ind1[subset[k]], k] = -np.Inf
-                dist[ind2[subset[k]], k] = -np.Inf
-                dist[ind3[subset[k]], k] = -np.Inf
-
-            predictions[subset] = np.argsort(-dist, axis=0)[:top_k].T
+            predictions[subset] = analogy_function(W[ind1[subset], :], W[ind2[subset], :], W[ind3[subset], :], ind1[subset], ind2[subset], ind3[subset],  W, top_k)
 
         max_val = np.zeros(0) # correct predictions
         for pred_index in range(top_k):

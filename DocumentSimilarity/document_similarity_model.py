@@ -69,7 +69,6 @@ class Model:
 	@staticmethod
 	def get_gold_and_actual_score(gold_stats, actual_stats):
 		merged = pd.merge(gold_stats, actual_stats, on=['doc1', 'doc2'], how='inner')
-		print(merged)
 		return (merged.iloc[:, 2], merged.iloc[:, 3])
 
 	@staticmethod
